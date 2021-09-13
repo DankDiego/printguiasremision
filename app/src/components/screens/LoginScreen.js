@@ -53,7 +53,7 @@ const LoginScreen = ({ history }) => {
     <>
       <div id='section' className='location__header' />
       <div id='section' className='location__header' />
-      <div className='container font-mono bg-gray-400'>
+      <div>
 
         <div className='container mx-auto'>
           <div className='flex justify-center px-6 my-12'>
@@ -67,7 +67,7 @@ const LoginScreen = ({ history }) => {
 
                   <div className='mb-4'>
                     <label className='block mb-2 text-sm font-bold text-white'>
-                      Ingrese su ID
+                      Ingresa tu ID
                     </label>
                     <input
                       className='w-full px-3 py-2 text-sm leading-tight text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
