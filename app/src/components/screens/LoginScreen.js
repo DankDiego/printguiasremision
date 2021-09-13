@@ -53,7 +53,7 @@ const LoginScreen = ({ history }) => {
     <>
       <div id='section' className='location__header' />
       <div id='section' className='location__header' />
-      <div classNameName='container font-mono bg-gray-400'>
+      <div className='container font-mono bg-gray-400'>
 
         <div className='container mx-auto'>
           <div className='flex justify-center px-6 my-12'>
@@ -66,7 +66,7 @@ const LoginScreen = ({ history }) => {
                 <form onSubmit={loginHandler} className='px-8 pt-6 pb-8 mb-4 bg-black rounded'>
 
                   <div className='mb-4'>
-                    <label className='block mb-2 text-sm font-bold text-white' for='username'>
+                    <label className='block mb-2 text-sm font-bold text-white'>
                       Ingresa tu ID
                     </label>
                     <input
@@ -81,7 +81,7 @@ const LoginScreen = ({ history }) => {
                     />
                   </div>
                   <div className='mb-4'>
-                    <label className='block mb-2 text-sm font-bold text-white' for='username'>
+                    <label className='block mb-2 text-sm font-bold text-white'>
                       Contraseña
                     </label>
                     <input

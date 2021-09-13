@@ -21,7 +21,7 @@ export const ExportCSV = ({ csvData, fileName }) => {
 
   return (
 
-    <button onClick={(e) => exportToCSV(csvData, fileName)}>Export</button>
+    <button className='border-2 border-transparent bg-green-500 ml-3 py-2 px-4 font-bold uppercase text-black rounded transition-all hover:border-green-500 hover:bg-transparent hover:text-green-500' onClick={(e) => exportToCSV(csvData, fileName)}>Generar Excel</button>
 
   )
 }
