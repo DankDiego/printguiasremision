@@ -2,13 +2,15 @@
   "name": "sistema-guias",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Sistema para imprimir sobre guias, guardar los datos en BD y generar excels",
   "workspaces": [
     "app",
     "api"
   ],
   "engines": {
+    "node":"14.15.0",
     "npm": "^7.17.0"
+    
   },
   "main": "index.js",
   "scripts": {

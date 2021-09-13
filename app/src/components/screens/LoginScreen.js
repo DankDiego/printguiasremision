@@ -67,7 +67,7 @@ const LoginScreen = ({ history }) => {
 
                   <div className='mb-4'>
                     <label className='block mb-2 text-sm font-bold text-white'>
-                      Ingresa tu ID
+                      Ingrese su ID
                     </label>
                     <input
                       className='w-full px-3 py-2 text-sm leading-tight text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
