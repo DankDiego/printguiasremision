@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import swal from 'sweetalert2'
-import { getGuias } from '../services/GuiaService'
+import { getRsociales } from '../services/RsocialService'
 import MaterialTable from 'material-table'
-const baseUrl = '/api/guias'
-const GuiasScreen = () => {
+
+const baseUrl = '/api/rsociales'
+const RsocialesScreen = () => {
   const [dataobj, setDataobj] = useState([])
 
   // Peticion axios delete
@@ -19,8 +20,8 @@ const GuiasScreen = () => {
 
   const alertaEliminar = (dataproducto) => {
     swal.fire({
-      title: `Quieres borrar ${dataproducto.llegada}?`,
-      text: 'Luego de borrar la guia no podras deshacer este cambio',
+      title: `Quieres borrar ${dataproducto.rzsocial}?`,
+      text: 'Luego de borrarlo no podras deshacer el cambio',
       icon: 'warning',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
@@ -33,7 +34,7 @@ const GuiasScreen = () => {
         setDataobj(dataobj.filter(producto => producto.id !== dataproducto.id))
         swal.fire(
           'Borrado!',
-          'La guia ha sido borrado.',
+          'El producto ha sido borrado.',
           'success'
         )
       }
@@ -43,15 +44,15 @@ const GuiasScreen = () => {
     let isCancelled = false
     // Peticion axios get
 
-    async function loadGuias () {
-      const response = await getGuias()
+    async function loadRsociales () {
+      const response = await getRsociales()
       if (response.status === 200) {
         if (!isCancelled) {
           setDataobj(response.data)
         }
       }
     }
-    loadGuias()
+    loadRsociales()
       .catch((err) => { console.log(err) })
 
     return () => {
@@ -64,18 +65,15 @@ const GuiasScreen = () => {
       <div className='main__container'>
         <MaterialTable
           columns={[
-            { title: 'Destino', field: 'llegada' },
-            { title: 'Razon Social', field: 'destirazonsocial' },
-            { title: 'Fecha Salida', field: 'fechayhora' },
-            { title: 'Placa Transporte', field: 'nroplaca' },
-            { title: 'Material', field: 'materialenviado' }
+            { title: 'Razon Social', field: 'rzsocial' },
+            { title: 'R.U.C', field: 'rzruc' }
           ]}
           data={dataobj}
-          title='Lista de Guias'
+          title='Lista de Razon Sociales y R.U.C'
           actions={[
             {
               icon: 'delete',
-              tooltip: 'Eliminar Producto',
+              tooltip: 'Eliminar Razon Social',
               onClick: (event, rowData) => alertaEliminar(rowData)
             }
           ]}
@@ -99,4 +97,4 @@ const GuiasScreen = () => {
     </main>
   )
 }
-export default GuiasScreen
+export default RsocialesScreen

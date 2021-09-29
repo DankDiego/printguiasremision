@@ -1,10 +1,74 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { saveGuia } from '../services/GuiaService'
-import { getPlacas } from '../services/PlacaService'
+import { getPlacasTn } from '../services/PlacaService'
 import { getMateriales } from '../services/MaterialService'
 import { jsPDF } from 'jspdf'
+import { getRsociales } from '../services/RsocialService'
 const CrearGuiaTonForm = () => {
+  const [idrsocial, setRsocial] = useState(-1)
+  const [idrsocialt, setRsocialt] = useState(-1)
+  const [rsociales, setRsociales] = useState([])
+  const [rsocialest, setRsocialest] = useState([])
+  const handleCargarRsocial = (selected) => {
+    const opcionrsocial = selected.target.value
+    setRsocial(opcionrsocial)
+    settingrsocialform(opcionrsocial)
+  }
+  const handleCargarRsocialt = (selected) => {
+    const opcionrsocialt = selected.target.value
+    setRsocialt(opcionrsocialt)
+    settingrsocialformt(opcionrsocialt)
+  }
+  useEffect(() => {
+    let desmontadoot = false
+    async function loadRsocialest () {
+      const response = await getRsociales()
+      if (response.status === 200) {
+        if (!desmontadoot) {
+          setRsocialest(response.data)
+        }
+      }
+    }
+    loadRsocialest()
+      .catch((err) => { console.log(err) })
+    return () => {
+      desmontadoot = true
+    }
+  }, [])
+  useEffect(() => {
+    let desmontadoo = false
+    async function loadRsociales () {
+      const response = await getRsociales()
+      if (response.status === 200) {
+        if (!desmontadoo) {
+          setRsociales(response.data)
+        }
+      }
+    }
+    loadRsociales()
+      .catch((err) => { console.log(err) })
+    return () => {
+      desmontadoo = true
+    }
+  }, [])
+  const settingrsocialform = (rosocialopc) => {
+    if (rosocialopc > -1) {
+      setValue('destiruc', rsociales[rosocialopc].rzruc)
+      setValue('destirazonsocial', rsociales[rosocialopc].rzsocial)
+    } else {
+      console.log('Seleccione Razon social Destinatario')
+    }
+  }
+  const settingrsocialformt = (rosocialopct) => {
+    if (rosocialopct > -1) {
+      setValue('transruc', rsocialest[rosocialopct].rzruc)
+      setValue('transrazonsocial', rsocialest[rosocialopct].rzsocial)
+    } else {
+      console.log('Seleccione Razon social Transportista')
+    }
+  }
+
   const [idplaca, setIdplaca] = useState(-1)
   const handleCargarPlaca = (selected) => {
     const opcionplaca = selected.target.value
@@ -16,7 +80,6 @@ const CrearGuiaTonForm = () => {
       setValue('nroplaca', placas[placarel].placanro)
       setValue('conductor', placas[placarel].conductor)
       setValue('nrolicencia', placas[placarel].conductorlic)
-      setValue('materialenviadocant', placas[placarel].capacidad)
       setValue('materialenviadound', placas[placarel].undmedida)
     } else {
       console.log('Seleccione Placa')
@@ -29,7 +92,7 @@ const CrearGuiaTonForm = () => {
     let isdesmontado = false
 
     async function loadPlacas () {
-      const response = await getPlacas()
+      const response = await getPlacasTn()
       if (response.status === 200) {
         if (!isdesmontado) {
           setPlacas(response.data)
@@ -180,6 +243,22 @@ const CrearGuiaTonForm = () => {
 
                         <label className='mb-1'>DESTINATARIO:</label>
                         {errors.destirazonsocial && <p className='text-red-600'>{errors.destirazonsocial.message}</p>}
+                        <select
+                          onChange={handleCargarRsocial}
+                          className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
+                          type='select'
+                        >
+                          <option value='-1'>
+                            Seleccione la Razon Social
+                          </option>
+                          {rsociales.map((val, key) => {
+                            return (
+                              <option key={key} value={key}>
+                                {val.rzsocial}
+                              </option>
+                            )
+                          })}
+                        </select>
                         <input
                           placeholder='Nombre o Denominacion o Razon Social'
                           className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
@@ -187,6 +266,8 @@ const CrearGuiaTonForm = () => {
                           {...register('destirazonsocial', {
                             required: '*Este campo es requerido'
                           })}
+                          value={idrsocial > -1 ? rsociales[idrsocial].rzsocial : ''}
+                          hidden
                         />
 
                       </div>
@@ -197,13 +278,8 @@ const CrearGuiaTonForm = () => {
                           placeholder='R.U.C Destinatario'
                           className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
                           type='text'
-                          {...register('destiruc', {
-                            required: '*Este campo es requerido',
-                            pattern: {
-                              value: /^[0-9]*$/,
-                              message: 'Solo Numeros'
-                            }
-                          })}
+                          {...register('destiruc')}
+                          value={idrsocial > -1 ? rsociales[idrsocial].rzruc : ''}
                         />
                       </div>
                       <div className='flex flex-col  w-2/6 px-2'>
@@ -289,7 +365,23 @@ const CrearGuiaTonForm = () => {
                       <div className='flex flex-col  w-3/6 px-2'>
                         <label className='mb-1'>DATOS DEL TRANSPORTISTA:</label>
                         {errors.transrazonsocial && <p className='text-red-600'>{errors.transrazonsocial.message}</p>}
-
+                        <select
+                          onChange={handleCargarRsocialt}
+                          placeholder='Nro de Placa'
+                          className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
+                          type='select'
+                        >
+                          <option value='-1'>
+                            Seleccione Transportista
+                          </option>
+                          {rsocialest.map((val, key) => {
+                            return (
+                              <option key={key} value={key}>
+                                {val.rzsocial}
+                              </option>
+                            )
+                          })}
+                        </select>
                         <input
                           placeholder='Razon Social Transportista'
                           className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
@@ -297,6 +389,8 @@ const CrearGuiaTonForm = () => {
                           {...register('transrazonsocial', {
                             required: '*Este campo es requerido'
                           })}
+                          value={idrsocialt > -1 ? rsocialest[idrsocialt].rzsocial : ''}
+                          hidden
                         />
                       </div>
                       <div className='flex flex-col w-3/6 px-2'>
@@ -307,12 +401,9 @@ const CrearGuiaTonForm = () => {
                           className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
                           type='text'
                           {...register('transruc', {
-                            required: '*Este campo es requerido',
-                            pattern: {
-                              value: /^[0-9]*$/,
-                              message: 'Solo numeros'
-                            }
+                            required: '*Este campo es requerido'
                           })}
+                          value={idrsocialt > -1 ? rsocialest[idrsocialt].rzruc : ''}
                         />
                       </div>
                     </div>

@@ -14,7 +14,9 @@ import CrearGuiaTonScreen from '../screens/CrearGuiaTonScreen'
 import GuiasScreen from '../screens/GuiasScreen'
 import ProductoScreenEdit from '../screens/ProductoScreenEdit'
 import MaterialesScreen from './../screens/MaterialesScreen'
+import RsocialesScreen from './../screens/RsocialesScreen'
 import CrearMaterialForm from './../screens/CrearMaterialForm'
+import CrearRsocialForm from './../screens/CrearRsocialForm'
 import EntreFechaReport from '../screens/EntreFechasReport'
 export default function AppRouter () {
   return (
@@ -31,6 +33,8 @@ export default function AppRouter () {
         <PrivateRoute exact path='/dashboard/ListaPlaca' component={PlacasScreen} />
         <PrivateRoute exact path='/dashboard/CrearMaterial' component={CrearMaterialForm} />
         <PrivateRoute exact path='/dashboard/ListaMaterial' component={MaterialesScreen} />
+        <PrivateRoute exact path='/dashboard/CrearRsocial' component={CrearRsocialForm} />
+        <PrivateRoute exact path='/dashboard/ListaRsocial' component={RsocialesScreen} />
         <PrivateRoute exact path='/dashboard/EntreFechasReporte' component={EntreFechaReport} />
         <PrivateRoute exact path='/dashboard/ListaProducto/edit/:id' component={ProductoScreenEdit} />
         <Route path='*' component={NotFoundScreen} />

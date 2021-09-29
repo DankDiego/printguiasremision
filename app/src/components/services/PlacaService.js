@@ -12,6 +12,30 @@ export async function getPlacas () {
     console.log(e)
   }
 }
+export async function getPlacasTn () {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/placas/tn`,
+      method: 'GET'
+    })
+    return response
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export async function getPlacasMc () {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/placas/mc`,
+      method: 'GET'
+    })
+    return response
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 export async function getPlaca (id) {
   try {
     console.log(id)

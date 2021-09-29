@@ -35,7 +35,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar, history }) => {
           <Link to='/dashboard/crearguia'> Guia M.Cubico</Link>
         </div>
         <div className='sidebar__link'>
-          <i className='fa fa-plus' />
+          <i className='fas fa-truck-loading' />
           <Link to='/dashboard/crearguiaton'> Guia Toneladas</Link>
         </div>
         <div className='sidebar__link'>
@@ -43,13 +43,13 @@ const Sidebar = ({ sidebarOpen, closeSidebar, history }) => {
           <Link to='/dashboard/ListaGuia'>Lista de Guias</Link>
         </div>
 
-        <h2><i className='fas fa-users-cog' /> Placas y Materiales</h2>
+        <h2><i className='fas fa-users-cog' /> Guardar en Base de Datos</h2>
         <div className='sidebar__link'>
           <i className='fas fa-truck-moving' />
           <Link to='/dashboard/CrearPlaca'>Registrar Placa</Link>
         </div>
         <div className='sidebar__link'>
-          <i className='fas fa-truck-moving' />
+          <i className='fas fa-id-card' />
           <Link to='/dashboard/ListaPlaca'>Lista de Placas</Link>
         </div>
         <div className='sidebar__link'>
@@ -59,6 +59,14 @@ const Sidebar = ({ sidebarOpen, closeSidebar, history }) => {
         <div className='sidebar__link'>
           <i className='fas fa-list' />
           <Link to='/dashboard/ListaMaterial'>Lista de Materiales</Link>
+        </div>
+        <div className='sidebar__link'>
+          <i className='fas fa-handshake' />
+          <Link to='/dashboard/crearrsocial'>Registrar R.Social</Link>
+        </div>
+        <div className='sidebar__link'>
+          <i className='fab fa-slideshare' />
+          <Link to='/dashboard/listarsocial'>Lista de R.Sociales</Link>
         </div>
         <h2><i className='fas fa-chart-line' /> Reportes</h2>
         <div className='sidebar__link'>

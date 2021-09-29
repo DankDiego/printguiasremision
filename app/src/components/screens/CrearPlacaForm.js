@@ -66,7 +66,7 @@ const CrearPlacaForm = () => {
                         >
 
                           <option value='m3'>Metro Cubico</option>
-                          <option value='t'>Toneladas</option>
+                          <option value='tn'>Toneladas</option>
                         </select>
 
                       </div>
@@ -109,13 +109,11 @@ const CrearPlacaForm = () => {
 
                     </div>
 
-                    <div className='flex items-center justify-between mb-5 text-right'>
-                      <div className='flex flex-col text-right w-3/6 px-2'>
-                        <input readOnly hidden type='text' id='idprod' className='rounded focus:outline-none text-gray-600 focus:text-gray-600' />
+                    <div className='flex items-center justify-between mb-5'>
+                      <div className='flex flex-col  w-3/6 px-2'>
+                        <button className='border-2 border-transparent bg-green-500 ml-3 py-2 px-4 font-bold uppercase text-black rounded transition-all hover:border-green-500 hover:bg-transparent hover:text-green-500'>Guardar</button>
 
                       </div>
-                      <button className='border-2 border-transparent bg-green-500 ml-3 py-2 px-4 font-bold uppercase text-black rounded transition-all hover:border-green-500 hover:bg-transparent hover:text-green-500'>Guardar</button>
-
                     </div>
 
                   </div>

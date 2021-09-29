@@ -1,11 +1,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { saveMaterial } from '../services/MaterialService'
-const CrearMaterialForm = () => {
+import { saveRsocial } from '../services/RsocialService'
+const CrearRsocialForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const onSubmit = (data, e) => {
-    saveMaterial(data)
+    saveRsocial(data)
     e.target.reset()
   }
   return (
@@ -18,7 +18,7 @@ const CrearMaterialForm = () => {
             <div className='w-full md:w-flex sm:w-flex rounded-xl '>
               <div className='flex flex-col'>
                 <div id='header' className='flex flex-col items-center justify-center text-black py-4'>
-                  <div className='text-center uppercase text-2xl'>Registrar Material</div>
+                  <div className='text-center uppercase text-2xl'>Registrar Razon Social</div>
 
                 </div>
 
@@ -27,13 +27,29 @@ const CrearMaterialForm = () => {
 
                     <div className='flex items-center justify-between mb-5'>
                       <div className='flex flex-col  w-3/6 px-2'>
-                        <label className='mb-1'>Nombre del Material:</label>
-                        {errors.matnombre && <p className='text-red-600'>{errors.matnombre.message}</p>}
+                        <label className='mb-1'>Nombre o Razon Social:</label>
+                        {errors.rzsocial && <p className='text-red-600'>{errors.rzsocial.message}</p>}
                         <input
                           placeholder='Placa del transporte'
                           className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
                           type='text'
-                          {...register('matnombre', {
+                          {...register('rzsocial', {
+                            required: '*Este campo es requerido'
+                          })}
+                        />
+
+                      </div>
+
+                    </div>
+                    <div className='flex items-center justify-between mb-5'>
+                      <div className='flex flex-col  w-3/6 px-2'>
+                        <label className='mb-1'>R.U.C:</label>
+                        {errors.rzruc && <p className='text-red-600'>{errors.rzruc.message}</p>}
+                        <input
+                          placeholder='Ingrese el nro de R.U.C'
+                          className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
+                          type='text'
+                          {...register('rzruc', {
                             required: '*Este campo es requerido'
                           })}
                         />
@@ -64,4 +80,4 @@ const CrearMaterialForm = () => {
     </main>
   )
 }
-export default CrearMaterialForm
+export default CrearRsocialForm

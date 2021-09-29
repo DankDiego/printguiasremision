@@ -27,7 +27,22 @@ placasRouter.get('/', async (req, res, next) => {
     next(err)
   }
 })
-
+placasRouter.get('/tn', async (req, res, next) => {
+  try {
+    const placas = await Placa.find({ undmedida: 'tn' })
+    res.json(placas).end()
+  } catch (err) {
+    next(err)
+  }
+})
+placasRouter.get('/mc', async (req, res, next) => {
+  try {
+    const placas = await Placa.find({ undmedida: 'm3' })
+    res.json(placas).end()
+  } catch (err) {
+    next(err)
+  }
+})
 placasRouter.get('/:id', async (req, res, next) => {
   const { id } = req.params
   Placa.findById(id)
