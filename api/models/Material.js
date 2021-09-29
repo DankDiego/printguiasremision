@@ -1,13 +1,13 @@
 const { model, Schema } = require('mongoose')
 
-const placaSchema = new Schema({
+const materialSchema = new Schema({
   matnombre: {
     type: String,
     required: [true, 'Por favor ingrese nombre del Material']
   }
 })
 
-placaSchema.set('toJSON', {
+materialSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id
     delete returnedObject._id
@@ -15,5 +15,5 @@ placaSchema.set('toJSON', {
   }
 })
 
-const Material = model('Material', placaSchema)
+const Material = model('Material', materialSchema)
 module.exports = Material

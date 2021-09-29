@@ -1,6 +1,6 @@
 import './Sidebar.css'
 import React from 'react'
-import logo from '../../../statics/logo.svg'
+import DyH from '../../../statics/DyHnoback.png'
 import { Link } from 'react-router-dom'
 const Sidebar = ({ sidebarOpen, closeSidebar, history }) => {
   const logoutSesion = () => {
@@ -11,7 +11,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar, history }) => {
     <div className={sidebarOpen ? 'sidebar_responsive' : ''} id='sidebar'>
       <div className='sidebar__title'>
         <div className='sidebar__img'>
-          <img src={logo} alt='logo' />
+          <img src={DyH} alt='logo' />
           <h1>Sistema Guias</h1>
         </div>
         <i
@@ -28,18 +28,22 @@ const Sidebar = ({ sidebarOpen, closeSidebar, history }) => {
           <Link to='/dashboard'>DashBoard</Link>
         </div>
 
-        <h2><i className='fa fa-shopping-bag' /> Guias</h2>
+        <h2><i className='fa fa-paperclip' /> Guias</h2>
 
         <div className='sidebar__link'>
+          <i className='fa fa-cube' />
+          <Link to='/dashboard/crearguia'> Guia M.Cubico</Link>
+        </div>
+        <div className='sidebar__link'>
           <i className='fa fa-plus' />
-          <Link to='/dashboard/crearguia'>Registrar Guia</Link>
+          <Link to='/dashboard/crearguiaton'> Guia Toneladas</Link>
         </div>
         <div className='sidebar__link'>
           <i className='fas fa-scroll' />
           <Link to='/dashboard/ListaGuia'>Lista de Guias</Link>
         </div>
 
-        <h2><i className='fas fa-users-cog' /> Administrar Personal</h2>
+        <h2><i className='fas fa-users-cog' /> Placas y Materiales</h2>
         <div className='sidebar__link'>
           <i className='fas fa-truck-moving' />
           <Link to='/dashboard/CrearPlaca'>Registrar Placa</Link>

@@ -7,10 +7,11 @@ guiasRouter.post('/', async (req, res, next) => {
   try {
     const time = new Date()
     const newGuia = new Guia({
+      nrodeguia: req.body.nrodeguia,
       partida: req.body.partida,
       llegada: req.body.llegada,
       fechainiciotraslado: new Date(),
-      horaguia: time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
+      fechayhora: time.toLocaleString('es-ES', { timeZone: 'America/Lima', hour12: true, year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
       destirazonsocial: req.body.destirazonsocial,
       destiruc: req.body.destiruc,
       destidni: req.body.destidni,
@@ -57,7 +58,7 @@ guiasRouter.post('/entrefechas', async (req, res, next) => {
       $lt: req.body.fechahasta // +1 dia
     }
 
-  })
+  }).select('-_id -fechainiciotraslado')
     .then(producto => {
       if (producto) { return res.json(producto).end() } else { return next(new ErrorResponse('No se encontraron guias dentro de este limite', 404)) }
     })

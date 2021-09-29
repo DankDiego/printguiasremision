@@ -10,7 +10,6 @@ const PlacasScreen = () => {
 
   // Peticion axios delete
   const peticionDelete = async (id) => {
-    console.log(id)
     await axios.delete(baseUrl + '/' + id)
       .then(response => {
       }).catch(error => {

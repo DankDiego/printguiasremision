@@ -47,15 +47,23 @@ const GuiasScreen = () => {
     })
   }
   useEffect(() => {
+    let isCancelled = false
     // Peticion axios get
+
     async function loadGuias () {
       const response = await getGuias()
       if (response.status === 200) {
-        setDataobj(response.data)
+        if (!isCancelled) {
+          setDataobj(response.data)
+        }
       }
     }
     loadGuias()
       .catch((err) => { console.log(err) })
+
+    return () => {
+      isCancelled = true
+    }
   }, [])
   const separador = (fecha) => {
     const str = fecha

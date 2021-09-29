@@ -10,6 +10,7 @@ import LoginScreen from '../screens/LoginScreen'
 import PlacasScreen from '../screens/PlacasScreen'
 import CrearPlacaScreen from '../screens/CrearPlacaScreen'
 import CrearGuiaScreen from '../screens/CrearGuiaScreen'
+import CrearGuiaTonScreen from '../screens/CrearGuiaTonScreen'
 import GuiasScreen from '../screens/GuiasScreen'
 import ProductoScreenEdit from '../screens/ProductoScreenEdit'
 import MaterialesScreen from './../screens/MaterialesScreen'
@@ -24,6 +25,7 @@ export default function AppRouter () {
         <PublicRoute exact path='/login' component={LoginScreen} />
         <PrivateRoute exact path='/dashboard' component={PrivateScreen} />
         <PrivateRoute exact path='/dashboard/CrearGuia' component={CrearGuiaScreen} />
+        <PrivateRoute exact path='/dashboard/CrearGuiaTon' component={CrearGuiaTonScreen} />
         <PrivateRoute exact path='/dashboard/ListaGuia' component={GuiasScreen} />
         <PrivateRoute exact path='/dashboard/CrearPlaca' component={CrearPlacaScreen} />
         <PrivateRoute exact path='/dashboard/ListaPlaca' component={PlacasScreen} />

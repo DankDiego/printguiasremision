@@ -49,9 +49,7 @@ const CrearPlacaForm = () => {
                           placeholder='Capacidad del transporte'
                           className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
                           type='text'
-                          {...register('capacidad', {
-                            required: '*Este campo es requerido'
-                          })}
+                          {...register('capacidad')}
                         />
                       </div>
 
@@ -60,15 +58,17 @@ const CrearPlacaForm = () => {
                       <div className='flex flex-col  w-3/6 px-2'>
                         <label className='mb-1'>Unidad de medida:</label>
                         {errors.undmedida && <p className='text-red-600'>{errors.undmedida.message}</p>}
-
-                        <input
-                          placeholder='Toneladas (t) o metro cubico (m3)'
-                          className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
-                          type='text'
+                        <select
                           {...register('undmedida', {
                             required: '*Este campo es requerido'
                           })}
-                        />
+                          className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
+                        >
+
+                          <option value='m3'>Metro Cubico</option>
+                          <option value='t'>Toneladas</option>
+                        </select>
+
                       </div>
 
                     </div>

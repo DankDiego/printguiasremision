@@ -6,8 +6,7 @@ const placaSchema = new Schema({
     required: [true, 'Por favor ingrese la Placa']
   },
   capacidad: {
-    type: String,
-    required: [true, 'Por favor ingrese la capacidad']
+    type: String
   },
   undmedida: {
     type: String,

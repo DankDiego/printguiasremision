@@ -28,6 +28,7 @@ export async function saveGuia (data) {
   try {
     // eslint-disable-next-line no-undef
     const dataguia = {
+      nrodeguia: data.nrodeguia,
       partida: data.partida,
       llegada: data.llegada,
       fechainiciotraslado: data.fechainiciotraslado,
@@ -62,7 +63,7 @@ export async function saveGuia (data) {
         toast: true,
         position: 'top-end'
       })
-      window.location.reload(false)
+      /* window.location.reload(false) RESETEAR PAGINA */
     } else {
       console.log('algo fue mal')
     }

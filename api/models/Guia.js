@@ -1,22 +1,10 @@
 const { model, Schema } = require('mongoose')
 
-/* const materialenviadoSchema = new Schema({
-  descripcion: {
-    type: String
-  },
-  cantidad: {
-    type: String
-  },
-  unimedida: {
-    type: String
-  },
-  pesototal: {
-    type: String
-  }
-
-}) */
-
 const guiaSchema = new Schema({
+  nrodeguia: {
+    type: String,
+    required: [true, 'Por favor ingrese el Numero de Guia']
+  },
   partida: {
     type: String,
     required: [true, 'Por favor ingrese el punto de partida']
@@ -28,7 +16,7 @@ const guiaSchema = new Schema({
   fechainiciotraslado: {
     type: Date
   },
-  horaguia: {
+  fechayhora: {
     type: String
   },
   destirazonsocial: {
@@ -69,8 +57,7 @@ const guiaSchema = new Schema({
   },
 
   materialenviadocant: {
-    type: String,
-    required: [true, 'Por favor Material enviado']
+    type: String
   },
 
   materialenviadound: {

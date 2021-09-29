@@ -4,7 +4,7 @@ import { saveGuia } from '../services/GuiaService'
 import { getPlacas } from '../services/PlacaService'
 import { getMateriales } from '../services/MaterialService'
 import { jsPDF } from 'jspdf'
-const CrearGuiaForm = () => {
+const CrearGuiaTonForm = () => {
   const [idplaca, setIdplaca] = useState(-1)
   const handleCargarPlaca = (selected) => {
     const opcionplaca = selected.target.value
@@ -26,19 +26,21 @@ const CrearGuiaForm = () => {
   const [placas, setPlacas] = useState([])
   const [materiales, setMateriales] = useState([])
   useEffect(() => {
-    let desmontado = false
+    let isdesmontado = false
+
     async function loadPlacas () {
       const response = await getPlacas()
       if (response.status === 200) {
-        if (!desmontado) {
+        if (!isdesmontado) {
           setPlacas(response.data)
         }
       }
     }
     loadPlacas()
       .catch((err) => { console.log(err) })
+
     return () => {
-      desmontado = true
+      isdesmontado = true
     }
   }, [])
   useEffect(() => {
@@ -86,12 +88,29 @@ const CrearGuiaForm = () => {
     doc.text(dataParsed.destidni, 10.6, 4.45)
     doc.text(dataParsed.transrazonsocial, 9, 5.1)
     doc.text(dataParsed.transruc, 10.6, 5.46)
-    doc.text(dataParsed.materialenviadocant, 8.9, 6.8)
-    doc.text(dataParsed.materialenviadound, 9.7, 6.8)
-    doc.text(dataParsed.materialenviado, 3.3, 6.8)
+    doc.text(dataParsed.materialenviado, 3.3, 6.7)
+    doc.text(dataParsed.materialenviadocant, 12, 6.7)
+    doc.text(dataParsed.materialenviadound, 9.7, 6.7)
     doc.text(fecha.toLocaleDateString('es-ES', options), 1, 4.4)
     doc.text('HORA:', 9, 9)
     doc.text(fecha.toLocaleString('es-ES', { hour: 'numeric', minute: 'numeric', hour12: true }), 10, 9)
+    doc.text(dataParsed.nroguiadest, 0.5, 8.1)
+    doc.text('Transp', 0.5, 8.5)
+    doc.text(dataParsed.nroguiatra, 1.5, 8.5)
+
+    /* doc.text('F3desc', 3.3, 7.2)
+    doc.text('F3cant', 8.9, 7.2)
+    doc.text('F3und', 9.7, 7.2)
+    doc.text('F4desc', 3.3, 7.7)
+    doc.text('F4cant', 8.9, 7.7)
+    doc.text('F4und', 9.7, 7.7)
+    doc.text('F5desc', 3.3, 8.1)
+    doc.text('F5cant', 8.9, 8.1)
+    doc.text('F5und', 9.7, 8.1)
+    doc.text('F6desc', 3.3, 8.6)
+    doc.text('F6cant', 8.9, 8.6)
+    doc.text('F6und', 9.7, 8.6) */
+
     doc.save(`${dataParsed.llegada}.pdf`)
   }
   return (
@@ -104,7 +123,7 @@ const CrearGuiaForm = () => {
             <div className='w-full md:w-flex sm:w-flex rounded-xl '>
               <div className='flex flex-col'>
                 <div id='header' className='flex flex-col items-center justify-center text-black py-4'>
-                  <div className='text-center uppercase text-2xl'>Registrar Guia Metro Cubico</div>
+                  <div className='text-center uppercase text-2xl'>Registrar Guia Toneladas</div>
 
                 </div>
 
@@ -335,14 +354,12 @@ const CrearGuiaForm = () => {
                         /> */}
                       </div>
                       <div className='flex flex-col w-3/6 px-2'>
-                        <label className='mb-1'>Cantidad</label>
+                        <label className='mb-1'>Peso Total</label>
                         {errors.materialenviadocant && <p className='text-red-600'>{errors.materialenviadocant.message}</p>}
                         <input
                           className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
                           type='text'
                           {...register('materialenviadocant')}
-                          value={idplaca > -1 ? placas[idplaca].capacidad : ''}
-
                         />
                       </div>
                       <div className='flex flex-col w-3/6 px-2'>
@@ -353,6 +370,31 @@ const CrearGuiaForm = () => {
                           type='text'
                           {...register('materialenviadound')}
                           value={idplaca > -1 ? placas[idplaca].undmedida : ''}
+                        />
+                      </div>
+                    </div>
+                    <div className='flex items-center justify-between mb-5'>
+
+                      <div className='flex flex-col w-3/6 px-2'>
+                        <label className='mb-1'>Numero Guia Destinatario</label>
+                        {errors.nroguiadest && <p className='text-red-600'>{errors.nroguiadest.message}</p>}
+                        <input
+                          className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
+                          type='text'
+                          placeholder='002-920'
+                          {...register('nroguiadest')}
+                        />
+                      </div>
+                      <div className='flex flex-col w-3/6 px-2'>
+                        <label className='mb-1'>Numero Guia Transportista</label>
+                        {errors.nroguiatra && <p className='text-red-600'>{errors.nroguiatra.message}</p>}
+                        <input
+                          className='py-3 px-5 rounded focus:outline-none text-gray-600 focus:text-gray-600'
+                          type='text'
+                          placeholder='00009-343'
+                          {...register('nroguiatra', {
+                            required: '*Este campo es requerido'
+                          })}
                         />
                       </div>
                     </div>
@@ -381,4 +423,4 @@ const CrearGuiaForm = () => {
     </main>
   )
 }
-export default CrearGuiaForm
+export default CrearGuiaTonForm
