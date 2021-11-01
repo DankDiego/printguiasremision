@@ -70,8 +70,12 @@ const Sidebar = ({ sidebarOpen, closeSidebar, history }) => {
         </div>
         <h2><i className='fas fa-chart-line' /> Reportes</h2>
         <div className='sidebar__link'>
-          <i className='fas fa-money-bill-wave' />
-          <Link to='/dashboard/EntreFechasReporte'>Guias entre fechas:</Link>
+          <i className='far fa-calendar-alt' />
+          <Link to='/dashboard/EntreFechasReporte'>Guias entre fechas</Link>
+        </div>
+        <div className='sidebar__link'>
+          <i className='fas fa-vest' />
+          <Link to='/dashboard/ReportePorMaterial'>Guias segun Material</Link>
         </div>
 
         <div className='sidebar__logout'>

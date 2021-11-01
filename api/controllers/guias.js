@@ -56,7 +56,25 @@ guiasRouter.post('/entrefechas', async (req, res, next) => {
     fechainiciotraslado: {
       $gte: req.body.fechadesde, // dia inicio
       $lt: req.body.fechahasta // +1 dia
-    }
+    },
+    destirazonsocial: req.body.nomrzsocial
+
+  }).select('-_id -fechainiciotraslado')
+    .then(producto => {
+      if (producto) { return res.json(producto).end() } else { return next(new ErrorResponse('No se encontraron guias dentro de este limite', 404)) }
+    })
+    .catch(err => {
+      next(err)
+    })
+})
+guiasRouter.post('/entrefechasmaterial', async (req, res, next) => {
+  Guia.find({
+    fechainiciotraslado: {
+      $gte: req.body.fechadesde, // dia inicio
+      $lt: req.body.fechahasta // +1 dia
+    },
+    destirazonsocial: req.body.nomrzsocial,
+    materialenviado: req.body.nommaterial
 
   }).select('-_id -fechainiciotraslado')
     .then(producto => {

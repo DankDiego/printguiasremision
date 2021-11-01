@@ -18,6 +18,7 @@ import RsocialesScreen from './../screens/RsocialesScreen'
 import CrearMaterialForm from './../screens/CrearMaterialForm'
 import CrearRsocialForm from './../screens/CrearRsocialForm'
 import EntreFechaReport from '../screens/EntreFechasReport'
+import ReporteMaterial from './../screens/ReporteMaterial'
 export default function AppRouter () {
   return (
     <Router>
@@ -36,6 +37,7 @@ export default function AppRouter () {
         <PrivateRoute exact path='/dashboard/CrearRsocial' component={CrearRsocialForm} />
         <PrivateRoute exact path='/dashboard/ListaRsocial' component={RsocialesScreen} />
         <PrivateRoute exact path='/dashboard/EntreFechasReporte' component={EntreFechaReport} />
+        <PrivateRoute exact path='/dashboard/ReportePorMaterial' component={ReporteMaterial} />
         <PrivateRoute exact path='/dashboard/ListaProducto/edit/:id' component={ProductoScreenEdit} />
         <Route path='*' component={NotFoundScreen} />
       </Switch>
