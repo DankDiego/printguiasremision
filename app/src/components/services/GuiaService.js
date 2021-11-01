@@ -82,7 +82,8 @@ export async function EntreFechasReporte (data) {
 
     const desdehasta = JSON.stringify({
       fechadesde: data.fechadesde,
-      fechahasta: data.fechahasta
+      fechahasta: data.fechahasta,
+      nomrzsocial: data.nomrzsocial
     })
     console.log(desdehasta)
     const response = await axios({
@@ -95,6 +96,50 @@ export async function EntreFechasReporte (data) {
     })
     if (response.status === 200) {
       console.log(response.data)
+      swal.fire({
+        title: 'Consulta correcta',
+        icon: 'success',
+        showCancelButton: false,
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end'
+      })
+
+      return response.data
+    } else {
+      console.log('Algo fue mal')
+    }
+  } catch (e) {
+    swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Algo salio mal!'
+    })
+    console.log(e)
+  }
+}
+export async function SegunMaterialReporte (data) {
+  try {
+    // eslint-disable-next-line no-undef
+
+    const desdehasta = JSON.stringify({
+      fechadesde: data.fechadesde,
+      fechahasta: data.fechahasta,
+      nomrzsocial: data.nomrzsocial,
+      nommaterial: data.nommaterial
+    })
+    /* console.log(desdehasta) */
+    const response = await axios({
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: `${baseUrl}/guias/entrefechasmaterial`,
+      method: 'POST',
+      data: desdehasta
+    })
+    if (response.status === 200) {
       swal.fire({
         title: 'Consulta correcta',
         icon: 'success',
